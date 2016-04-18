@@ -7,6 +7,8 @@
 <body ng-app="myShoppingList" ng-cloak ng-controller="myCtrl">
 
 <script>
+
+    //My Stuff application
     var app = angular.module("myShoppingList", []); 
     
     app.controller("myCtrl", function($scope) {
