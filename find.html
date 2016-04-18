@@ -51,6 +51,7 @@
             
             $scope.current = $scope.tags[x];
             $scope.edit = {};
+			$scope.edit.id = x;
             $scope.edit.name = $scope.current.name;
             $scope.edit.color = $scope.current.color;
             $scope.edit.shapes = $scope.current.shapes;
@@ -66,16 +67,13 @@
 
         }
         
-        $scope.removeItem = function (x) {
+        $scope.removeItem = function () {
+		
             $scope.errortext = "";    
-            $scope.products.splice(x, 1);
+            $scope.tags.splice($scope.edit.id, 1);
+			document.getElementById('editItem').style.display='none';
         }
-        $scope.thisButton = function (x) {
-          
 
-          $scope.current = $scope.tags[x];
-      
-        }
     });
 </script>
 
@@ -154,8 +152,8 @@
             </header>
             <div class="w3-container">
 
-                <p> </p>
                 <p> Current:{{edit}}</p>
+                <p> edit{{edit}} </p>
     
                 <button  class="w3-btn {{edit.color}} {{edit.shapes}}">{{edit.name}} </button>
                 
@@ -173,8 +171,10 @@
 
             </div>
             <footer class="w3-container w3-container w3-light-grey w3-padding">
+				
                 <button class="w3-btn w3-right w3-white w3-border" onclick="document.getElementById('editItem').style.display='none'" >Close</button>
                 <button class="w3-btn w3-right w3-red  w3-border" ng-click="saveItem()">Save</button>
+				<button class="w3-btn w3-left w3-white w3-border" ng-click="removeItem()" >Delete</button>
             </footer>
           </div>
       </div>
