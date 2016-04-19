@@ -48,13 +48,8 @@
             }
         }
         $scope.addItem = function () {
-            $scope.errortext = "";
-            if (!$scope.current.name) {return;}
-            if ($scope.tags.indexOf($scope.current.name) == -1) {
-                $scope.tags.push($scope.current);
-            } else {
-                $scope.errortext = "The item is already in your list.";
-            }
+
+          document.getElementById('addItem').style.display='block'; 
         }
 
         $scope.editItem = function (x) {
@@ -85,118 +80,106 @@
         }
 
     });
-</script>
+  </script>
 
-    <div  class="w3-card-2 w3-margin" style="max-width:400px;">
-      <header class="w3-container w3-light-grey w3-padding-16">
-        <h3>My Tags</h3>
-      </header>
+  <div  class="w3-card-4 w3-margin" style="max-width:400px;">
+    <header class="w3-container w3-teal w3-padding-16">
+      <h3>My Tags</h3>
+    </header>
       
       <!--Filter-->
-      <div class="w3-btn-group" >
-            <button ng-repeat="tag in tags" id="{{$index}}" class="w3-btn {{tag.color}} {{tag.shapes}}" ng-click="editItem($index)">{{tag.name}} </button>
+    <div class="w3-btn-group w3-light-grey w3-padding-16" >
+      <button ng-repeat="tag in tags" id="{{$index}}" class="w3-btn {{tag.color}} {{tag.shapes}}" ng-click="editItem($index)">{{tag.name}} </button>
 
 
-      </div>
       
-      <div class="w3-container w3-light-grey w3-padding-16">
-        <div class="w3-row w3-margin-top">
-          <div class="w3-col s10">
-
-
-
-
-          </div>
-          <div class="w3-col s2">
-
-            <button ng-click="addItem()" class="w3-btn-floating-large w3-teal">+</button>           
-          </div>
-        </div>
-        
-        
-
-        
-        <p class="w3-padding-left w3-text-red">{{errortext}}</p>
-      </div>
-      
-      
-      <!--List-->
-      <!--div>
-          <ul class="w3-ul">
-            <li ng-repeat="product in products" class="w3-padding-16">{{product}}<span ng-click="removeItem($index)" style="cursor:pointer;" class="w3-right w3-margin-right">×</span></li>
-          </ul>
-      </div-->
-      <!--div class="w3-container w3-light-grey w3-padding-16">
-        <div class="w3-row w3-margin-top">
-          <div class="w3-col s10">
-            <input placeholder="Add shopping items here" ng-model="addMe" class="w3-input w3-border w3-padding">
-          </div>
-          <div class="w3-col s2">
-            <button ng-click="addItem()" class="w3-btn w3-padding w3-green">Add</button>
-          </div>
-        </div>
-        <p class="w3-padding-left w3-text-red">{{errortext}}</p>
-      </div-->
     </div>
-    
-   
-    <!--Modal för att registrera en ny tag-->
-    <div id="id01" class="w3-modal">
-      <div class="w3-modal-content">
-        <div class="w3-container">
-          <span onclick="document.getElementById('id01').style.display='none'" class="w3-closebtn">&times;</span>
-          <p>Some text. Some text. Some text.</p>
-          <p>Some text. Some text. Some text.</p>
-        </div>
-      </div>
+    <div class="w3-light-grey w3-padding-16" >
+
+      <a ng-click="addItem()" class="w3-btn-floating w3-red">+</a>
     </div>
+                 
+
+    <p class="w3-padding-left w3-text-red">{{errortext}}</p>
+  </div>
+  
     <!--Modal för att editera en tag-->
-    <div id="editItem" class="w3-modal">
+  <div id="editItem" class="w3-modal">
 
-        <div class="w3-modal-content w3-animate-zoom w3-card-8">
-            <header class="w3-container w3-teal"> 
+    <div class="w3-modal-content w3-animate-zoom w3-card-8">
+      <header class="w3-container w3-teal"> 
 
-              
-              <span onclick="document.getElementById('editItem').style.display='none'" class="w3-closebtn">&times;</span>
-              
-              <h2>Modal Header</h2>
-            </header>
-            <div class="w3-container">
+        <span onclick="document.getElementById('editItem').style.display='none'" class="w3-closebtn">&times;</span>
+        
+        <h2>Modal Header</h2>
 
-                <p> Current:{{edit}}</p>
-                <p> edit{{edit}} </p>
-    
-                <button  class="w3-btn {{edit.color}} {{edit.shapes}}">{{edit.name}} </button>
-                
-                <input  ng-model="edit.name" class="w3-input w3-border w3-padding">
-                <!--input  ng-model="current.color" class="w3-input w3-border w3-padding">
-                <input  ng-model="current.shapes" class="w3-input w3-border w3-padding"-->
-    
-                <select ng-model="edit.color" class="w3-select w3-border">
-                    <option ng-repeat="x in colorList" value="{{x.code}}">{{x.color}}</option>
-                </select>
-              
-                <select ng-model="edit.shapes" class="w3-select w3-border">
-                    <option ng-repeat="x in shapeList" value="{{x.code}}">{{x.shape}}</option>
-                </select>
+      </header>
+      <div class="w3-container">
 
-            </div>
-            <footer class="w3-container w3-container w3-light-grey w3-padding">
-				
-                <button class="w3-btn w3-right w3-white w3-border" onclick="document.getElementById('editItem').style.display='none'" >Close</button>
-                <button class="w3-btn w3-right w3-red  w3-border" ng-click="saveItem()">Save</button>
-				        <button class="w3-btn w3-left w3-white w3-border" ng-click="removeItem()" >Delete</button>
-            </footer>
-          </div>
+        <p> Current:{{edit}}</p>
+        <p> edit{{edit}} </p>
+
+        <button  class="w3-btn {{edit.color}} {{edit.shapes}}">{{edit.name}} </button>
+        
+        <input  ng-model="edit.name" class="w3-input w3-border w3-padding">
+        <!--input  ng-model="current.color" class="w3-input w3-border w3-padding">
+        <input  ng-model="current.shapes" class="w3-input w3-border w3-padding"-->
+
+        <select ng-model="edit.color" class="w3-select w3-border">
+            <option ng-repeat="x in colorList" value="{{x.code}}">{{x.color}}</option>
+        </select>
+      
+        <select ng-model="edit.shapes" class="w3-select w3-border">
+            <option ng-repeat="x in shapeList" value="{{x.code}}">{{x.shape}}</option>
+        </select>
+
       </div>
+      <footer class="w3-container w3-container w3-light-grey w3-padding">
+			
+        <button class="w3-btn w3-right w3-white w3-border" onclick="document.getElementById('editItem').style.display='none'" >Close</button>
+        <button class="w3-btn w3-right w3-red  w3-border" ng-click="saveItem()">Save</button>
+        <button class="w3-btn w3-left w3-white w3-border" ng-click="removeItem()" >Delete</button>
+      </footer>
     </div>
+  </div>
 
+  <!--Modal create new tag-->
+  <div id="addItem" class="w3-modal">
 
+    <div class="w3-modal-content w3-animate-zoom w3-card-8">
+      <header class="w3-container w3-teal"> 
 
+        
+        <span onclick="document.getElementById('addItem').style.display='none'" class="w3-closebtn">&times;</span>
+        
+        <h2>Create Tag</h2>
+      </header>
+      <div class="w3-container">
 
+        <p> Current:{{current}}</p>
+        <p> edit{{edit}} </p>
 
+        <button  class="w3-btn {{edit.color}} {{edit.shapes}}">{{edit.name}} </button>
+        
+        <input  ng-model="edit.name" class="w3-input w3-border w3-padding">
+        <!--input  ng-model="current.color" class="w3-input w3-border w3-padding">
+        <input  ng-model="current.shapes" class="w3-input w3-border w3-padding"-->
 
+        <select ng-model="edit.color" class="w3-select w3-border">
+            <option ng-repeat="x in colorList" value="{{x.code}}">{{x.color}}</option>
+        </select>
+      
+        <select ng-model="edit.shapes" class="w3-select w3-border">
+            <option ng-repeat="x in shapeList" value="{{x.code}}">{{x.shape}}</option>
+        </select>
 
-
+      </div>
+      <footer class="w3-container w3-container w3-light-grey w3-padding">
+        
+        <button class="w3-btn w3-right w3-white w3-border" onclick="document.getElementById('addItem').style.display='none'" >Close</button>
+        <button class="w3-btn w3-right w3-red  w3-border" ng-click="addItem()">Save</button>
+      </footer>
+    </div>
+  </div>
 </body>
 </html>
