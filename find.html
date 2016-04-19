@@ -48,8 +48,15 @@
             }
         }
         $scope.addItem = function () {
+			
+			$scope.edit = {};
+			document.getElementById('addItem').style.display='block'; 
+        }
 
-          document.getElementById('addItem').style.display='block'; 
+        $scope.createItem = function () {
+			
+			$scope.tags.push($scope.edit);
+			document.getElementById('addItem').style.display='none'; 
         }
 
         $scope.editItem = function (x) {
@@ -177,7 +184,7 @@
       <footer class="w3-container w3-container w3-light-grey w3-padding">
         
         <button class="w3-btn w3-right w3-white w3-border" onclick="document.getElementById('addItem').style.display='none'" >Close</button>
-        <button class="w3-btn w3-right w3-red  w3-border" ng-click="addItem()">Save</button>
+        <button class="w3-btn w3-right w3-red  w3-border" ng-click="createItem()">Save</button>
       </footer>
     </div>
   </div>
