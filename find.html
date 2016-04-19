@@ -38,6 +38,15 @@
         
 
 
+        $scope.xaddItem = function () {
+            $scope.errortext = "";
+            if (!$scope.current.name) {return;}
+            if ($scope.tags.indexOf($scope.current.name) == -1) {
+                $scope.tags.push($scope.current);
+            } else {
+                $scope.errortext = "The item is already in your list.";
+            }
+        }
         $scope.addItem = function () {
             $scope.errortext = "";
             if (!$scope.current.name) {return;}
@@ -47,11 +56,12 @@
                 $scope.errortext = "The item is already in your list.";
             }
         }
+
         $scope.editItem = function (x) {
             
             $scope.current = $scope.tags[x];
             $scope.edit = {};
-			$scope.edit.id = x;
+            $scope.edit.id = x;
             $scope.edit.name = $scope.current.name;
             $scope.edit.color = $scope.current.color;
             $scope.edit.shapes = $scope.current.shapes;
@@ -98,12 +108,13 @@
 
           </div>
           <div class="w3-col s2">
-            <button ng-click="addItem()" class="w3-btn w3-padding w3-green">Add</button>
+
+            <button ng-click="addItem()" class="w3-btn-floating-large w3-teal">+</button>           
           </div>
         </div>
         
         
-        <button onclick="document.getElementById('id01').style.display='block'" class="w3-btn-floating-large w3-teal">+</button>
+
         
         <p class="w3-padding-left w3-text-red">{{errortext}}</p>
       </div>
@@ -174,7 +185,7 @@
 				
                 <button class="w3-btn w3-right w3-white w3-border" onclick="document.getElementById('editItem').style.display='none'" >Close</button>
                 <button class="w3-btn w3-right w3-red  w3-border" ng-click="saveItem()">Save</button>
-				<button class="w3-btn w3-left w3-white w3-border" ng-click="removeItem()" >Delete</button>
+				        <button class="w3-btn w3-left w3-white w3-border" ng-click="removeItem()" >Delete</button>
             </footer>
           </div>
       </div>
