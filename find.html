@@ -1,192 +1,24 @@
 <!DOCTYPE html>
 <html>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-    
-<body ng-app="myShoppingList" ng-cloak ng-controller="myCtrl">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+  <script src="tag.js"></script>    
 
-<script>
-	//Städa js
-    //My Stuff application
-    var app = angular.module("myShoppingList", []); 
-    
-    app.controller("myCtrl", function($scope) {
-        
-     
-        $scope.tags = [ 
-        {"name":"vinden", "color":"w3-grey","shapes":"w3-round"},
-        {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
-        {"name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
-        {"name":"a2", "color":"w3-red","shapes":""}
-         ];
+  <body ng-app="myTags" ng-cloak ng-controller="myCtrl">
 
-        
-
-        $scope.colorList = [
-            {code : "w3-yellow", color : "Yellow"},
-            {code : "w3-orange", color : "Orange"},
-            {code : "w3-red", color : "Red"},
-            {code : "w3-purple", color : "Purple"},
-            {code : "w3-grey", color : "Grey"}
-        ];
-        $scope.shapeList = [
-            {code : "", shape : "Normal"},
-            {code : "w3-round", shape : "Round"},
-            {code : "w3-round-xlarge", shape : "Rounder"}
-        ];
-        
-
-
-        $scope.xaddItem = function () {
-            $scope.errortext = "";
-            if (!$scope.current.name) {return;}
-            if ($scope.tags.indexOf($scope.current.name) == -1) {
-                $scope.tags.push($scope.current);
-            } else {
-                $scope.errortext = "The item is already in your list.";
-            }
-        }
-        $scope.addItem = function () {
-			
-			$scope.edit = {};
-			document.getElementById('addItem').style.display='block'; 
-        }
-
-        $scope.createItem = function () {
-			
-			$scope.tags.push($scope.edit);
-			document.getElementById('addItem').style.display='none'; 
-        }
-
-        $scope.editItem = function (x) {
-            
-            $scope.current = $scope.tags[x];
-            $scope.edit = {};
-            $scope.edit.id = x;
-            $scope.edit.name = $scope.current.name;
-            $scope.edit.color = $scope.current.color;
-            $scope.edit.shapes = $scope.current.shapes;
-            
-            document.getElementById('editItem').style.display='block';
-        }
-        $scope.saveItem = function () {
-            
-            document.getElementById('editItem').style.display='none';
-            $scope.current.name = $scope.edit.name;
-            $scope.current.color = $scope.edit.color;
-            $scope.current.shapes = $scope.edit.shapes;
-
-        }
-        
-        $scope.removeItem = function () {
-		
-            $scope.errortext = "";    
-            $scope.tags.splice($scope.edit.id, 1);
-			document.getElementById('editItem').style.display='none';
-        }
-
-    });
-  </script>
-
-  <div  class="w3-card-4 w3-margin" style="max-width:400px;">
-    <header class="w3-container w3-teal w3-padding-16">
-      <h3>My Tags</h3>
-    </header>
-      
-      <!--Filter-->
-    <div class="w3-btn-group w3-light-grey w3-padding-16" >
-      <button ng-repeat="tag in tags" id="{{$index}}" class="w3-btn {{tag.color}} {{tag.shapes}}" ng-click="editItem($index)">{{tag.name}} </button>
-
-
-      
-    </div>
-    <div class="w3-light-grey w3-padding-16" >
-
-      <a ng-click="addItem()" class="w3-btn-floating w3-red">+</a>
-    </div>
-                 
-
-    <p class="w3-padding-left w3-text-red">{{errortext}}</p>
-  </div>
-  
-    <!--Modal för att editera en tag-->
-  <div id="editItem" class="w3-modal">
-
-    <div class="w3-modal-content w3-animate-zoom w3-card-8">
-      <header class="w3-container w3-teal"> 
-
-        <span onclick="document.getElementById('editItem').style.display='none'" class="w3-closebtn">&times;</span>
-        
-        <h2>Modal Header</h2>
-
+    <div  class="w3-card-4 w3-margin" style="max-width:400px;">
+      <header class="w3-container w3-teal w3-padding-16">
+        <h3>My List <a ng-click="addItem()" class="w3-right w3-btn-floating w3-red">+</a></h3>
       </header>
-      <div class="w3-container">
 
-        <p> Current:{{edit}}</p>
-        <p> edit{{edit}} </p>
 
-        <button  class="w3-btn {{edit.color}} {{edit.shapes}}">{{edit.name}} </button>
-        
-        <input  ng-model="edit.name" class="w3-input w3-border w3-padding">
-        <!--input  ng-model="current.color" class="w3-input w3-border w3-padding">
-        <input  ng-model="current.shapes" class="w3-input w3-border w3-padding"-->
+      <ul class="w3-ul">
+        <li ng-repeat="stuff in stuffs" class="w3-padding-hor-16">{{stuff.desc}}<span ng-click="removeItem($index)" style="cursor:pointer;" class="w3-right w3-margin-right">x</span></li>
+      </ul>
 
-        <select ng-model="edit.color" class="w3-select w3-border">
-            <option ng-repeat="x in colorList" value="{{x.code}}">{{x.color}}</option>
-        </select>
-      
-        <select ng-model="edit.shapes" class="w3-select w3-border">
-            <option ng-repeat="x in shapeList" value="{{x.code}}">{{x.shape}}</option>
-        </select>
-
-      </div>
-      <footer class="w3-container w3-container w3-light-grey w3-padding">
-			
-        <button class="w3-btn w3-right w3-white w3-border" onclick="document.getElementById('editItem').style.display='none'" >Close</button>
-        <button class="w3-btn w3-right w3-red  w3-border" ng-click="saveItem()">Save</button>
-        <button class="w3-btn w3-left w3-white w3-border" ng-click="removeItem()" >Delete</button>
-      </footer>
+      <p class="w3-padding-left w3-text-red">{{errortext}}</p>
     </div>
-  </div>
-
-  <!--Modal create new tag-->
-  <div id="addItem" class="w3-modal">
-
-    <div class="w3-modal-content w3-animate-zoom w3-card-8">
-      <header class="w3-container w3-teal"> 
-
-        
-        <span onclick="document.getElementById('addItem').style.display='none'" class="w3-closebtn">&times;</span>
-        
-        <h2>Create Tag</h2>
-      </header>
-      <div class="w3-container">
-
-        <p> Current:{{current}}</p>
-        <p> edit{{edit}} </p>
-
-        <button  class="w3-btn {{edit.color}} {{edit.shapes}}">{{edit.name}} </button>
-        
-        <input  ng-model="edit.name" class="w3-input w3-border w3-padding">
-        <!--input  ng-model="current.color" class="w3-input w3-border w3-padding">
-        <input  ng-model="current.shapes" class="w3-input w3-border w3-padding"-->
-
-        <select ng-model="edit.color" class="w3-select w3-border">
-            <option ng-repeat="x in colorList" value="{{x.code}}">{{x.color}}</option>
-        </select>
-      
-        <select ng-model="edit.shapes" class="w3-select w3-border">
-            <option ng-repeat="x in shapeList" value="{{x.code}}">{{x.shape}}</option>
-        </select>
-
-      </div>
-      <footer class="w3-container w3-container w3-light-grey w3-padding">
-        
-        <button class="w3-btn w3-right w3-white w3-border" onclick="document.getElementById('addItem').style.display='none'" >Close</button>
-        <button class="w3-btn w3-right w3-red  w3-border" ng-click="createItem()">Save</button>
-      </footer>
-    </div>
-  </div>
-</body>
+    
+  </body>
 </html>
