@@ -1,6 +1,7 @@
     //My Stuff application
     var app = angular.module("myTags", []); 
     
+
     app.controller("myCtrl", function($scope) {
         
      
@@ -11,7 +12,12 @@
         {"name":"a2", "color":"w3-red","shapes":""}
          ];
 
-        
+        $scope.stuffs = [ 
+        {"desc":"Agnes skridskor"},
+        {"desc":"Gosedjur"},
+        {"desc":"IT prylar"},
+        {"desc":"Annat"}
+         ]; 
 
         $scope.colorList = [
             {code : "w3-yellow", color : "Yellow"},
@@ -73,7 +79,7 @@
     
             $scope.errortext = "";    
             $scope.tags.splice($scope.edit.id, 1);
-      document.getElementById('editItem').style.display='none';
+            document.getElementById('editItem').style.display='none';
         }
 
     });
