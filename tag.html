@@ -3,16 +3,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <script src="tag.js"></script>
     
 <body ng-app="myTags" ng-cloak ng-controller="myCtrl">
-<script src="tag.js"></script>
+
 
 
   <div  class="w3-card-4 w3-margin" style="max-width:400px;">
     <header class="w3-container w3-teal w3-padding-16">
       <h3>My Tags</h3>
     </header>
-      
+ 
       <!--Filter-->
     <div class="w3-btn-group w3-light-grey w3-padding-16" >
       <button ng-repeat="tag in tags" id="{{$index}}" class="w3-btn {{tag.color}} {{tag.shapes}}" ng-click="editItem($index)">{{tag.name}} </button>
