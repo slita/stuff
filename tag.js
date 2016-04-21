@@ -13,11 +13,27 @@
          ];
 
         $scope.stuffs = [ 
-        {"desc":"Agnes skridskor"},
-        {"desc":"Gosedjur"},
-        {"desc":"IT prylar"},
-        {"desc":"Annat"}
+        {"desc":"Agnes skridskor","tags":
+            [{"active":"yes","name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
+            {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"}
+            ]},
+        {"desc":"Gosedjur","tags":
+            [{"active":"yes","name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
+            {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"}
+            ]},
+        {"desc":"IT prylar","tags":
+            [{"active":"yes","name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
+            {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"}
+            ]},
+        {"desc":"Annat","tags":
+            [{"active":"yes","name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
+            {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"}
+            ]},
          ]; 
+
+
+ 
+
 
         $scope.colorList = [
             {code : "w3-yellow", color : "Yellow"},
