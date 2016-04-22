@@ -13,42 +13,62 @@
         };
     });
 
-    app.controller("myCtrl", function($scope) {
+     app.filter('myActiveTags', function() {
+        return function(x) {
+
+            txt = "false";    
+            if (x.active == "yes"){
+                txt = "true";
+            }
+
+            return txt;
+        };
+    });
+   app.controller("myCtrl", function($scope) {
         
      
         $scope.tags = [ 
-        {"name":"vinden", "color":"w3-grey","shapes":"w3-round"},
-        {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
-        {"name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
-        {"name":"a2", "color":"w3-red","shapes":""}
-         ];
+        {"active":"no","name":"vinden", "color":"w3-grey","shapes":"w3-round"},
+        {"active":"no","name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
+        {"active":"no","name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
+        {"active":"no","name":"a2", "color":"w3-red","shapes":""}];
+
+        $scope.template =
+            {"desc":"", "tags":[ 
+                {"active":"no","name":"vinden", "color":"w3-grey","shapes":"w3-round"},
+                {"active":"no","name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
+                {"active":"no","name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
+                {"active":"no","name":"a2", "color":"w3-red","shapes":""}
+                ]};
+             
+
 
         $scope.stuffs = [ 
-        {"desc":"Agnes skridskor","tags":
-            [{"active":"yes","name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
-            {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
-            {"name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
-            {"name":"a2", "color":"w3-red","shapes":""}
-            ]},
-        {"desc":"Gosedjur","tags":
-            [{"active":"yes","name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
-            {"active":"yes","name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
-            {"name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
-            {"name":"a2", "color":"w3-red","shapes":""}
-            ]},
-        {"desc":"IT prylar","tags":
-            [{"active":"yes","name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
-            {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
-            {"name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
-            {"name":"a2", "color":"w3-red","shapes":""}
-            ]},
-        {"desc":"Annat","tags":
-            [{"active":"yes","name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
-            {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
-            {"name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
-            {"name":"a2", "color":"w3-red","shapes":""}
-            ]},
-         ]; 
+            {"desc":"Agnes skridskor","tags":
+                [{"active":"yes","name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
+                {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
+                {"name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
+                {"name":"a2", "color":"w3-red","shapes":""}
+                ]},
+            {"desc":"Gosedjur","tags":
+                [{"active":"yes","name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
+                {"active":"no","name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
+                {"active":"yes","name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
+                {"name":"a2", "color":"w3-red","shapes":""}
+                ]},
+            {"desc":"IT prylar","tags":
+                [{"active":"yes","name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
+                {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
+                {"name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
+                {"name":"a2", "color":"w3-red","shapes":""}
+                ]},
+            {"desc":"Annat","tags":
+                [{"active":"yes","name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
+                {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
+                {"name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
+                {"active":"yes","name":"a2", "color":"w3-red","shapes":""}
+                ]},
+             ]; 
 
 
  
@@ -86,8 +106,8 @@
 
         $scope.createItem = function () {
       
-      $scope.tags.push($scope.edit);
-      document.getElementById('addItem').style.display='none'; 
+            $scope.tags.push($scope.edit);
+            document.getElementById('addItem').style.display='none'; 
         }
 
         $scope.editItem = function (x) {
@@ -115,6 +135,16 @@
             $scope.errortext = "";    
             $scope.tags.splice($scope.edit.id, 1);
             document.getElementById('editItem').style.display='none';
+        }
+        $scope.addStuff = function () {
+      
+            $scope.newStuff = $scope.template;
+            document.getElementById('addStuff').style.display='block'; 
+        }
+        $scope.updateStuff = function (x) {
+            //alert(x);
+            $scope.stuffs = angular.copy(x);
+            document.getElementById('addStuff').style.display='none'; 
         }
 
 
