@@ -14,8 +14,9 @@
 
 
       <ul class="w3-ul">
-        <li ng-repeat="stuff in stuffs" class="w3-padding-hor-16">{{stuff.desc}} {{stuff.tags[0].name}}<span ng-click="removeItem($index)" style="cursor:pointer;" class="w3-right w3-margin-right">x</span>
-          <p ng-repeat="x in stuff.tags"> {{x.name}}</p></li>
+        <li ng-repeat="stuff in stuffs" class="w3-padding-hor-16">{{stuff.desc}}<span ng-click="removeItem($index)" style="cursor:pointer;" class="w3-right w3-margin-right">x</span>
+          <br><br>
+          <button ng-repeat="tag in stuff.tags" id="{{$index}}" class="w3-btn {{tag | myColorActive}} {{tag.shapes}}" ng-click="editItem($index)">{{tag.name}} </button></li>
       </ul>
 
       <p class="w3-padding-left w3-text-red">{{errortext}}</p>
