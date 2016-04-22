@@ -1,6 +1,17 @@
     //My Stuff application
     var app = angular.module("myTags", []); 
     
+    app.filter('myColorActive', function() {
+        return function(x) {
+
+            txt = "w3-light-grey";    
+            if (x.active == "yes"){
+                txt = x.color;
+            }
+
+            return txt;
+        };
+    });
 
     app.controller("myCtrl", function($scope) {
         
@@ -15,19 +26,27 @@
         $scope.stuffs = [ 
         {"desc":"Agnes skridskor","tags":
             [{"active":"yes","name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
-            {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"}
+            {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
+            {"name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
+            {"name":"a2", "color":"w3-red","shapes":""}
             ]},
         {"desc":"Gosedjur","tags":
             [{"active":"yes","name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
-            {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"}
+            {"active":"yes","name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
+            {"name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
+            {"name":"a2", "color":"w3-red","shapes":""}
             ]},
         {"desc":"IT prylar","tags":
             [{"active":"yes","name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
-            {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"}
+            {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
+            {"name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
+            {"name":"a2", "color":"w3-red","shapes":""}
             ]},
         {"desc":"Annat","tags":
             [{"active":"yes","name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
-            {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"}
+            {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
+            {"name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
+            {"name":"a2", "color":"w3-red","shapes":""}
             ]},
          ]; 
 
@@ -97,5 +116,6 @@
             $scope.tags.splice($scope.edit.id, 1);
             document.getElementById('editItem').style.display='none';
         }
+
 
     });
