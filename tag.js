@@ -5,7 +5,7 @@
         return function(x) {
 
             txt = "w3-light-grey";    
-            if (x.active == "yes"){
+            if (x.active){
                 txt = x.color;
             }
 
@@ -17,8 +17,8 @@
         return function(x) {
 
             txt = "false";    
-            if (x.active == "yes"){
-                txt = "true";
+            if (x.active){
+                txt = true;
             }
 
             return txt;
@@ -35,38 +35,38 @@
 
         $scope.template =
             {"desc":"", "tags":[ 
-                {"active":"no","name":"vinden", "color":"w3-grey","shapes":"w3-round"},
-                {"active":"no","name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
-                {"active":"no","name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
-                {"active":"no","name":"a2", "color":"w3-red","shapes":""}
+                {"active":false,"name":"vinden", "color":"w3-grey","shapes":"w3-round"},
+                {"active":false,"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
+                {"active":false,"name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
+                {"active":false,"name":"a2", "color":"w3-red","shapes":""}
                 ]};
              
 
 
         $scope.stuffs = [ 
             {"desc":"Agnes skridskor","tags":
-                [{"active":"yes","name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
+                [{"active":true,"name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
                 {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
                 {"name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
                 {"name":"a2", "color":"w3-red","shapes":""}
                 ]},
             {"desc":"Gosedjur","tags":
-                [{"active":"yes","name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
-                {"active":"no","name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
-                {"active":"yes","name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
+                [{"active":true,"name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
+                {"active":false,"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
+                {"active":true,"name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
                 {"name":"a2", "color":"w3-red","shapes":""}
                 ]},
             {"desc":"IT prylar","tags":
-                [{"active":"yes","name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
+                [{"active":true,"name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
                 {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
                 {"name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
                 {"name":"a2", "color":"w3-red","shapes":""}
                 ]},
             {"desc":"Annat","tags":
-                [{"active":"yes","name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
+                [{"active":true,"name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
                 {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
                 {"name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
-                {"active":"yes","name":"a2", "color":"w3-red","shapes":""}
+                {"active":true,"name":"a2", "color":"w3-red","shapes":""}
                 ]},
              ]; 
 
@@ -136,16 +136,35 @@
             $scope.tags.splice($scope.edit.id, 1);
             document.getElementById('editItem').style.display='none';
         }
-        $scope.addStuff = function () {
-      
-            $scope.newStuff = $scope.template;
-            document.getElementById('addStuff').style.display='block'; 
-        }
-        $scope.updateStuff = function (x) {
-            //alert(x);
-            $scope.stuffs = angular.copy(x);
-            document.getElementById('addStuff').style.display='none'; 
-        }
 
+        $scope.changeStuff = function (x) {
+      
+			if (x == null)
+			{
+				$scope.editStuff = angular.copy($scope.template);
+			}
+			else
+			{
+
+				$scope.editStuff = $scope.stuffs[x];
+			}
+            
+			
+            document.getElementById('editStuff').style.display='block'; 
+        }
+        $scope.updateStuff = function () {
+
+			$scope.stuffs.push($scope.editStuff);
+            document.getElementById('editStuff').style.display='none'; 
+        }
+        $scope.selectTag = function (x) {
+
+			if ($scope.editStuff.tags[x].active)
+			{
+				$scope.editStuff.tags[x].active = false;
+			} else {
+				$scope.editStuff.tags[x].active = true;
+			}
+		}
 
     });

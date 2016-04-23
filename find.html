@@ -9,20 +9,16 @@
 
     <div  class="w3-card-4 w3-margin" style="max-width:400px;">
       <header class="w3-container w3-teal w3-padding-16">
-        <div><h3>My List </h3><a ng-click="addStuff()" class="w3-right w3-btn-floating w3-red" >+</a></div>
+        <div><h3>My List </h3><a ng-click="changeStuff()" class="w3-right w3-btn-floating w3-red" >+</a></div>
       </header>
 
 
       <ul class="w3-ul">
-        <li ng-repeat="stuff in stuffs" class="w3-padding-hor-16">{{stuff.desc}}<span ng-click="removeItem($index)" style="cursor:pointer;" class="w3-right w3-margin-right">x</span>
+        <li ng-repeat="stuff in stuffs" class="w3-padding-hor-16">{{stuff.desc}}<span ng-click="changeStuff($index)" style="cursor:pointer;" class="w3-right w3-margin-right">change</span>
           <br><br>
-          <!-- Visa bara aktiva taggar -->
-
-            <!--button  ng-repeat="tag in stuff.tags" id="{{$index}}" ng-show = "{{tag | myActiveTags}}" class="w3-btn {{tag | myColorActive}} {{tag.shapes}}" ng-click="editItem($index)">{{tag.name}} </button-->
-            <button  ng-repeat="tag in stuff.tags" id="{{$index}}" ng-if="tag.active =='yes'" class="w3-btn {{tag | myColorActive}} {{tag.shapes}}" ng-click="editItem($index)">{{tag.name}} </button>
+			<!-- Visa bara aktiva taggar -->
+            <button  ng-repeat="tag in stuff.tags" id="{{$index}}" ng-if="tag.active" class="w3-btn {{tag | myColorActive}} {{tag.shapes}}" ng-click="editItem($index)">{{tag.name}} </button>
             
-            <p ng-if="stuff.desc == 'Gosedjur'">foo{{stuff.desc}}</p>
-
         </li>
       </ul>
 
@@ -30,24 +26,24 @@
     </div>
     
     <!--Modal create new stuff-->
-    <div id="addStuff" class="w3-modal ">
+    <div id="editStuff" class="w3-modal ">
 
       <div class="w3-modal-content w3-animate-zoom w3-card-8">
         <header class="w3-container w3-teal"> 
-          <span onclick="document.getElementById('addStuff').style.display='none'" class="w3-closebtn">&times;</span>
-          <h2>Create Stuff</h2>
+          <span onclick="document.getElementById('editStuff').style.display='none'" class="w3-closebtn">&times;</span>
+          <h2>Stuff</h2>
         </header>
 
         <div class="w3-container">
           <p>Foo {{newStuff.desc}} {{newStuff.tags[0].name}}</p>
-          <input  ng-model="newStuff.desc" class="w3-input w3-border w3-padding">
-          <button  ng-repeat="tag in newStuff.tags" class="w3-btn {{tag | myColorActive}} {{tag.shapes}}" ng-click="editItem($index)">{{tag.name}} </button>
+          <input  ng-model="editStuff.desc" class="w3-input w3-border w3-padding">
+          <button  ng-repeat="tag in editStuff.tags" class="w3-btn {{tag | myColorActive}} {{tag.shapes}}" ng-click="selectTag($index)">{{tag.name}} </button>
 
         </div>
 
         <footer class="w3-container w3-container w3-light-grey w3-padding">
-          <button class="w3-btn w3-right w3-white w3-border" onclick="document.getElementById('addStuff').style.display='none'" >Close</button>
-          <button class="w3-btn w3-right w3-red  w3-border" ng-click="updateStuff(template)">Save</button>
+          <button class="w3-btn w3-right w3-white w3-border" onclick="document.getElementById('editStuff').style.display='none'" >Close</button>
+          <button class="w3-btn w3-right w3-red  w3-border" ng-click="updateStuff()">Save</button>
         </footer>
       </div>
     </div> <!--END Modal create new stuff-->
