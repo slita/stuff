@@ -138,7 +138,8 @@
         }
 
         $scope.changeStuff = function (x) {
-      
+			
+			$scope.rowId = x;
 			if (x == null)
 			{
 				$scope.editStuff = angular.copy($scope.template);
@@ -146,16 +147,23 @@
 			else
 			{
 
-				$scope.editStuff = $scope.stuffs[x];
+				$scope.editStuff = angular.copy($scope.stuffs[$scope.rowId]);
 			}
             
-			
             document.getElementById('editStuff').style.display='block'; 
         }
         $scope.updateStuff = function () {
+			
+			if ($scope.rowId != null)
+			{
+				$scope.stuffs[$scope.rowId] = $scope.editStuff;
 
-			$scope.stuffs.push($scope.editStuff);
-            document.getElementById('editStuff').style.display='none'; 
+			}else {
+				$scope.stuffs.push($scope.editStuff);
+            }
+			$scope.rowId = null;
+			document.getElementById('editStuff').style.display='none'; 
+
         }
         $scope.selectTag = function (x) {
 
