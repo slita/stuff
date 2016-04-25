@@ -3,21 +3,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <script src="tag.js"></script>    
 
   <body ng-app="myTags" ng-cloak ng-controller="myCtrl">
 
-    <div  class="w3-card-4 w3-margin" style="max-width:400px;">
+    <div  class="w3-card-4 w3-margin" style=" max-width:400px;">
       <header class="w3-container w3-teal w3-padding-16">
-        <div><h3>My List </h3><a ng-click="changeStuff()" class="w3-right w3-btn-floating w3-red" >+</a></div>
+
+        <div>
+          <a ng-click="changeStuff()" class="w3-right w3-btn-floating w3-red" >+</a>
+           <h3> 
+           <a href="#" ng-click="changeStuff()"><i class="material-icons w3-xlarge">menu</i></a> My List </h3>
+        
+        </div>
       </header>
 
-
+      <div class=" w3-margin">
+        <i class="material-icons w3-xlarge">search</i>
+        <input type="search" class="w3-input" ng-model="search.desc" placeholder="Search">
+      </div>
+        
       <ul class="w3-ul">
-        <li ng-repeat="stuff in stuffs" class="w3-padding-hor-16">{{stuff.desc}}<span ng-click="changeStuff($index)" style="cursor:pointer;" class="w3-right w3-margin-right">change</span>
+        <li ng-repeat="stuff in stuffs | filter:search:strict" class="w3-padding-hor-16" ><span class="w3-xlarge">{{stuff.desc}}</span> <span ng-click="changeStuff($index)" style="cursor:pointer;" class="w3-right w3-margin-right "><i class="material-icons w3-xlarge">edit</i></span>
           <br><br>
 			<!-- Visa bara aktiva taggar -->
-            <button  ng-repeat="tag in stuff.tags" id="{{$index}}" ng-if="tag.active" class="w3-btn {{tag | myColorActive}} {{tag.shapes}}" ng-click="editItem($index)">{{tag.name}} </button>
+            <button  ng-repeat="tag in stuff.tags" id="{{$index}}" ng-if="tag.active" class="w3-btn {{tag | myColorActive}} {{tag.shapes}}" >{{tag.name}} </button>
             
         </li>
       </ul>
@@ -32,25 +43,28 @@
         <header class="w3-container w3-teal"> 
           <span onclick="document.getElementById('editStuff').style.display='none'" class="w3-closebtn">&times;</span>
           <h2>Stuff</h2>
+          
         </header>
 
-        <div class="w3-container">
-          <p>Foo {{newStuff.desc}} {{newStuff.tags[0].name}}</p>
-          <input  ng-model="editStuff.desc" class="w3-input w3-border w3-padding">
+        <div class="w3-container w3-margin">
+          
+        
+          <textarea  type="text" ng-model="editStuff.desc" class="w3-input w3-xlarge " placeholder="New stuff..." ></textarea>
+          <label class="w3-label">Description</label>
+          <br>
+          <br>
           <button  ng-repeat="tag in editStuff.tags" class="w3-btn {{tag | myColorActive}} {{tag.shapes}}" ng-click="selectTag($index)">{{tag.name}} </button>
+          <br>
+          <label class="w3-label">Tags</label>
+        
 
-        <!--Valbara taggar  -->
-		</div class="w3-container">
-			<button  ng-repeat="tag in tags" class="w3-btn {{tag | myColorActive}} {{tag.shapes}}" ng-click="selectTag($index)">{{tag.name}} </button>
-		<div>
-
-
-		</div>
+		    </div>
 
         <footer class="w3-container w3-container w3-light-grey w3-padding">
           <button class="w3-btn w3-right w3-white w3-border" onclick="document.getElementById('editStuff').style.display='none'" >Close</button>
-          <button class="w3-btn w3-right w3-red  w3-border" ng-click="updateStuff()">Save</button>
+          <button class="w3-btn  w3-right w3-red  w3-border" ng-click="updateStuff()">Save</button>
         </footer>
+
       </div>
     </div> <!--END Modal create new stuff-->
 

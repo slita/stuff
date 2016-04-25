@@ -26,7 +26,7 @@
     });
    app.controller("myCtrl", function($scope) {
         
-     
+  
         $scope.tags = [ 
         {"active":"no","name":"vinden", "color":"w3-grey","shapes":"w3-round"},
         {"active":"no","name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
@@ -47,7 +47,8 @@
             {"desc":"Agnes skridskor","tags":
                 [{"active":true,"name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
                 {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
-                {"name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"}
+                {"name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
+                {"name":"a2", "color":"w3-red","shapes":""}
                 ]},
             {"desc":"Gosedjur","tags":
                 [{"active":true,"name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
@@ -153,13 +154,14 @@
 			}
             
 			//Kontrollera om valbara taggar har förändrats
+/*
 var values = {name: 'misko', gender: 'male'};
 
 var foo = [];
 angular.forEach($scope.tags, function(value, key) {
   alert(key + ': ' + value.name);
 },foo);
-
+*/
 
             document.getElementById('editStuff').style.display='block'; 
         }
