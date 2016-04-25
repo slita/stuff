@@ -47,8 +47,7 @@
             {"desc":"Agnes skridskor","tags":
                 [{"active":true,"name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
                 {"name":"garage", "color":"w3-orange","shapes":"w3-round-xlarge"},
-                {"name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"},
-                {"name":"a2", "color":"w3-red","shapes":""}
+                {"name":"a1", "color":"w3-purple","shapes":"w3-round-xlarge"}
                 ]},
             {"desc":"Gosedjur","tags":
                 [{"active":true,"name":"vinden", "color":"w3-grey","shapes":"w3-round"}, 
@@ -143,6 +142,9 @@
 			if (x == null)
 			{
 				$scope.editStuff = angular.copy($scope.template);
+
+
+
 			}
 			else
 			{
@@ -150,6 +152,15 @@
 				$scope.editStuff = angular.copy($scope.stuffs[$scope.rowId]);
 			}
             
+			//Kontrollera om valbara taggar har förändrats
+var values = {name: 'misko', gender: 'male'};
+
+var foo = [];
+angular.forEach($scope.tags, function(value, key) {
+  alert(key + ': ' + value.name);
+},foo);
+
+
             document.getElementById('editStuff').style.display='block'; 
         }
         $scope.updateStuff = function () {
@@ -169,6 +180,18 @@
 
 			if ($scope.editStuff.tags[x].active)
 			{
+				$scope.editStuff.tags[x].active = false;
+			} else {
+				$scope.editStuff.tags[x].active = true;
+			}
+		}
+		//Välj tag och addera till stuffs taggar
+        $scope.shoseTag = function (x) {
+
+			
+			if ($scope.editStuff.tags[x].active)
+			{
+				
 				$scope.editStuff.tags[x].active = false;
 			} else {
 				$scope.editStuff.tags[x].active = true;
